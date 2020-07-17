@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/atm.css' />
+  </head>
+  <body>
+    <script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.5.2/angular.min.js"></script>
+    <script type="application/javascript" src="/javascripts/atm.js"></script>
+    <h1><%= title %></h1>
+    <p>Welcome to <%= title %></p>
+    <div ng-controller="main">
+
+      <div>
+        Withdraw
+        <label class="switch">
+          <input type="checkbox" ng-model="showDeposit">
+          <span class="slider round"></span>
+        </label>
+        Deposit
+        <br/>
+      </div>
+      <br/>
+
+      <div>
+        <input type="text" ng-model="accountId" class="form-control"></input>
+        <button ng-click="getBalance()" ng-init="">Get balance</button>
+        <button ng-click="executeAction()" ng-init="">{{ showDeposit ? 'Deposit' : 'Withdraw' }}</button>
+      </div>
+
+      <br/>
+
+      <div ng-show="showDeposit">
+        <button ng-click="addBanknote()" ng-init="">+</button>
+        <ul>
+          <li ng-repeat="coiso in repeater">
+            Amount: <input type="number" ng-model="coiso.amount" class="form-control"></input>
+            Value: <input type="number" ng-model="coiso.value" class="form-control"></input>
+            <button ng-click="removeBanknote($index)">-</button>
+          </li>
+          <li ng-if="repeater.length === 0">
+            <strong>No banknotes...</strong>
+          </li>
+        </ul>
+      </div>
+
+      <div ng-hide="showDeposit">
+        Amount: <input type="number" ng-model="withdrawAmount" class="form-control"></input>
+        Denomination: <input type="number" ng-model="denominationAmount" class="form-control"></input>
+        <table class="table table-striped table-bordered">
+          <thead>
+              <tr>
+                  <th>Denomination</th>
+                  <th>Number Of Notes</th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr ng-repeat="detail in details">
+                  <td>
+                      <input type="text" class="form-control" ng-model="detail.amount" required/></td>
+                  <td>
+                      <input type="text" class="form-control"  ng-model="detail.value" required/></td>
+              </tr>
+          </tbody>
+      </table>
+      </div>
+
+    </div>
+  </body>
+</html>
