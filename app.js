@@ -36,6 +36,8 @@ create a Banknote collection in mongo and insert some values in it like
 The solution provided is a general solution considering atm supports any type of note
 ---------------------------------------------------
 Run node ./bin/www
+Amount is the amount of note, value is number of notes, and the text dialog box before 
+a button get balance is used for inputting user
 */
 
 app.use('/api/', index);
